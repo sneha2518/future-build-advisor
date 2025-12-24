@@ -2,8 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/https://future-build-advisor.lovable.app
-
+**URL**: https://future-build-advisor.lovable.app
 ## How can I edit this code?
 
 There are several ways of editing your application.
