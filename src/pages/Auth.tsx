@@ -8,10 +8,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { Compass, Mail, Lock, User, ArrowRight, Sparkles } from 'lucide-react';
 import { z } from 'zod';
+import PasswordStrengthIndicator from '@/components/auth/PasswordStrengthIndicator';
 
 const authSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain an uppercase letter')
+    .regex(/[a-z]/, 'Password must contain a lowercase letter')
+    .regex(/\d/, 'Password must contain a number')
+    .regex(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain a special character'),
   fullName: z.string().min(2, 'Name must be at least 2 characters').optional(),
 });
 
@@ -238,6 +244,7 @@ const Auth = () => {
                   {errors.password && (
                     <p className="text-sm text-destructive">{errors.password}</p>
                   )}
+                  {!isLogin && <PasswordStrengthIndicator password={password} />}
                 </div>
 
                 <Button 
